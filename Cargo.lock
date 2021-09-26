@@ -72,7 +72,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "test-1"
+name = "rust-black-jack"
 version = "0.1.0"
 dependencies = [
  "rand",

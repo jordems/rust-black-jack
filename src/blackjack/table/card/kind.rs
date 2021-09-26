@@ -1,5 +1,3 @@
-
-
 #[derive(Debug, Clone, Copy)]
 pub enum Kind {
     Ace,
@@ -61,3 +59,22 @@ pub fn kind_to_index(kind: Kind)-> u8 {
     }
 }
 
+/// Converts all cards to it's score equivalent. `Aces` are assumed 1 and that logic is handled elsewhere.
+pub fn kind_to_score(kind: Kind)-> u8 {
+    match kind {
+        Kind::Ace => 1,
+        Kind::Two => 2,
+        Kind::Three => 3,
+        Kind::Four => 4,
+        Kind::Five => 5,
+        Kind::Six => 6,
+        Kind::Seven => 7,
+        Kind::Eight => 8,
+        Kind::Nine => 9,
+        Kind::Ten => 10,
+        Kind::Jack => 10,
+        Kind::Queen => 10,
+        Kind::King => 10,
+        
+    }
+}

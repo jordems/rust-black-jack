@@ -1,13 +1,11 @@
+mod blackjack;
 
-#[path="game/deck.rs"] mod deck; use deck::Deck;
+use blackjack::Game;
 
 fn main() {
-    let mut deck = Deck::new();
+    let mut game = Game::new();
 
-    for _ in 0..deck.size() {
-        println!("Pulled Card {:?}",deck.pop());
-    }
+    game.start();
 
-    
 }
 

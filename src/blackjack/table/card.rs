@@ -1,7 +1,9 @@
-mod suite; 
-mod kind; 
+pub mod suite; 
+pub mod kind; 
 
-use self::{kind::{Kind, index_to_kind}, suite::{Suite, index_to_suite}};
+pub use suite::{Suite, index_to_suite};
+pub use kind::{Kind, index_to_kind, kind_to_score};
+
 
 
 /// The implementation of a Single Card of a deck
@@ -31,6 +33,9 @@ impl Card {
     pub fn get_kind(&self) -> Kind {
         self.kind
     }
-}
 
+    pub fn get_score(&self)-> u8 {
+        kind_to_score(self.kind)
+    }
+}
 

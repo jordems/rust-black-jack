@@ -1,9 +1,7 @@
-use core::fmt;
 
-use self::{card::Card, rng::generate_random_number};
 
-#[path ="card/card.rs"] mod card; 
-#[path = "rng/rng.rs"] mod rng; 
+use super::Card;
+use super::rng::generate_random_number;
 
 pub struct Deck {
     cards: Vec<Card>,
@@ -18,6 +16,7 @@ impl Deck {
     /// This strategy means that we will be storing the cards in a random order in memory at deck creation time.
     /// Then just pop a card out of the list when we want another card. 
     /// An opposing strategy would be to generate a random number between 0-[# of cards left] every time you want a new card.
+    /// The latter being what would probably be used in an actual official gambling application.
     ///
     /// - Generate one of every card in the deck in an array of size 52 called `s`
     /// - Create a random sequence of numbers from 0 - 51 in an array of size 52 called `r`
