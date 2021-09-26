@@ -1,8 +1,7 @@
 mod table; 
 
-use crate::blackjack::table::TableAction;
+use crate::game::table::TableAction;
 use self::table::Table;
-
 
 /// Game loop and such
 pub struct Game {
@@ -17,7 +16,7 @@ impl Game {
     }
 
     pub fn start(&mut self) {
-        println!("Welcome to Rust Black Jack, You can't bet any money. All you can do is Play. Have fun c:");
+        println!("Welcome to Rust Black Jack, You can't bet any money. All you can do is play. Have fun c:");
         
         loop {
             self.round();
@@ -27,7 +26,7 @@ impl Game {
     fn round(&mut self) {
         println!("--------------------------------");
         println!("Round Start. Dealing Cards, Good luck!");
-        self.table.deal(); // TODO Get info and print it for display
+        self.table.deal();
 
         loop {
             println!("(h) to Hit, (s) to Stand");
