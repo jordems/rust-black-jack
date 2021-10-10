@@ -1,9 +1,9 @@
-mod deck; 
+mod shoe; 
 mod player;
 mod card;
 mod rng;
 
-use deck::Deck;
+use shoe::Shoe;
 use player::Player;
 use card::{Card, Kind};
 
@@ -13,7 +13,7 @@ pub enum TableAction {
 }
 
 pub struct Table {
-    deck: Deck,
+    shoe: Shoe,
     dealer: Player,
     player: Player,
 }
@@ -23,7 +23,7 @@ impl Table {
     /// Creates a new table with a deck of cards 
     pub fn new() -> Self {
         Self {
-            deck: Deck::new(),
+            shoe: Shoe::new(4),
             dealer: Player::new(),
             player: Player::new(),
         }
@@ -31,12 +31,12 @@ impl Table {
 
     /// Pulls cards for player and dealer, and sets
     pub fn deal(&mut self){
-        let player_cards= [self.pull_card(), self.pull_card()];
+        let player_cards= [self.shoe.pull_card(), self.shoe.pull_card()];
         for card in player_cards {
             self.player.add_card_to_hand(card);
         }
 
-        let dealer_cards = [self.pull_card(), self.pull_card()];
+        let dealer_cards = [self.shoe.pull_card(), self.shoe.pull_card()];
         for card in dealer_cards {
             self.dealer.add_card_to_hand(card)
         }
@@ -51,7 +51,7 @@ impl Table {
     pub fn action(&mut self, action: TableAction) -> bool {
         match action {
             TableAction::Hit => {
-                let card = self.pull_card();
+                let card = self.shoe.pull_card();
                 self.player.add_card_to_hand(card);
                 println!("Card pulled: {:?}", card);
 
@@ -79,7 +79,7 @@ impl Table {
         println!("Dealer's hidden card was {:?} making {}", self.dealer.get_hand()[1], dealer_score);
 
         loop {
-            let card = self.pull_card();
+            let card = self.shoe.pull_card();
             self.dealer.add_card_to_hand(card);
             println!("Dealer pulls a {:?}", card);
             dealer_score = self.dealer.evaluate_hand();
@@ -101,24 +101,6 @@ impl Table {
             println!("You win with a {} against the dealers {}", player_score, dealer_score);
         }
         self.clean_round();
-    }
-
-
-
-    /// Pulls a card out of the deck. if there is no cards remaining in the deck, it will generate a new deck. 
-    fn pull_card(&mut self) -> Card {
-        let pulled_card = self.deck.pop();
-
-        match pulled_card {
-            Some(card) => card,
-            None => {
-                self.deck = Deck::new();
-                match self.deck.pop() {
-                    Some(card) => card,
-                    None => panic!("Deck was created with no cards")
-                }
-            }
-        }
     }
 
 
