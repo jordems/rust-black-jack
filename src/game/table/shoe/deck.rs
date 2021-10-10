@@ -1,7 +1,7 @@
 
 
 use super::Card;
-use super::rng::generate_random_number;
+use super::generate_random_number;
 
 pub struct Deck {
     cards: Vec<Card>,
